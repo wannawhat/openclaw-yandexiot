@@ -7,9 +7,14 @@
 Требования: **python3**, pip
 
 ```bash
-git clone https://github.com/wannawhat/openclaw-yandexiot
-cd openclaw-yandexiot
-pip install -r requirements.txt
+# Клонируем в workspace tools
+cd /root/.openclaw/workspace/tools
+git clone https://github.com/wannawhat/openclaw-yandexiot yandex-home
+cd yandex-home
+
+# Создаём venv и ставим зависимости
+python3 -m venv venv
+venv/bin/pip install requests python-dotenv pydantic
 ```
 
 ### Авторизация
@@ -37,10 +42,13 @@ pip install -r requirements.txt
 ### Проверка установки
 
 ```bash
-python3 main.py get_all
+cd /root/.openclaw/workspace/tools/yandex-home
+venv/bin/python3 main.py get_all
 ```
 
 Если вернулся JSON со списком устройств — всё готово.
+
+**Важно:** всегда используй полные пути к device_id (не работают сокращённые ID вида `1b82d50d`). Сначала вызывай `get_all`, чтобы получить полные ID.
 
 ---
 
